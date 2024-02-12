@@ -1,4 +1,4 @@
-# slog-ctx
+# slogx
 
 Attach a slog.Logger to a context
 
@@ -6,10 +6,10 @@ Attach a slog.Logger to a context
 logger := slog.New(slog.NewTextHandler(os.Stderr, nil))
 
 // Attach
-ctx := slogctx.WithContext(context.Background(), logger)
+ctx := slogx.WithContext(context.Background(), logger)
 
 // Retrieve
-log := slogctx.Ctx(ctx)
+log := slogx.Ctx(ctx)
 
 log.Info("Hello world")
 ```
