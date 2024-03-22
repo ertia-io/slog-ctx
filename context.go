@@ -26,9 +26,11 @@ func Ctx(ctx context.Context) *slog.Logger {
 	return logger
 }
 
-// WithContext attaches a slog.Logger to the provided context
+// WithContext attaches a slog.Logger to the provided context. A copy of the provided
+// logger is made to provide isolation.
 func WithContext(ctx context.Context, logger *slog.Logger) context.Context {
-	return context.WithValue(ctx, contextKey{}, logger)
+	lCopy := *logger
+	return context.WithValue(ctx, contextKey{}, &lCopy)
 }
 
 // With attaches given attributes to the slog.Logger found inside the context.
