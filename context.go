@@ -30,3 +30,9 @@ func Ctx(ctx context.Context) *slog.Logger {
 func WithContext(ctx context.Context, logger *slog.Logger) context.Context {
 	return context.WithValue(ctx, contextKey{}, logger)
 }
+
+// With attaches given attributes to the slog.Logger found inside the context.
+// If there is no logger on the context, it will attach a logger with io.Discard.
+func With(ctx context.Context, args ...any) context.Context {
+	return WithContext(ctx, Ctx(ctx).With(args...))
+}
